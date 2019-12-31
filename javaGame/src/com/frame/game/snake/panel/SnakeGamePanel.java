@@ -181,11 +181,15 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
                     }
                 }while (a);
 
-                if (score>50*flag&&time>=50){
+                if (score>50*flag&&time>50){
                     time = time - 50;
                     timer.setDelay(time);
                     flag++;
                 }
+
+                //解决吃球后身体乱出现
+                snakeX[len-1] = snakeX[len-2];
+                snakeY[len-1] = snakeY[len-2];
 
             }
 
