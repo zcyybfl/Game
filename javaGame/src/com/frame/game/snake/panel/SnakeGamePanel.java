@@ -50,6 +50,8 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
 
     int len = 3;
     int score;
+    int time = 150;
+    int flag =1;
     int[] snakeX = new int[750];
     int[] snakeY = new int[750];
     String direction = "R";//方向
@@ -71,6 +73,8 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
     }
 
     public void paintComponent(Graphics g){
+
+
 
         super.paintComponent(g);
         this.setBackground(Color.WHITE);
@@ -168,7 +172,16 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
                         }
                     }
                 }while (a);
+
+                if (score>50*flag){
+                    time = time - 50;
+                    timer.setDelay(time);
+                    flag++;
+                }
+
             }
+
+
 
             for (int i = 1; i < len; i++) {
                 if (snakeX[i]==snakeX[0]&&snakeY[i]==snakeY[0]){
@@ -177,6 +190,9 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
             }
             repaint();
         }
+
+
+
         timer.start();
     }
 
