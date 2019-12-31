@@ -57,7 +57,7 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
     String direction = "R";//方向
     boolean isStarted = false;
     boolean isFiled = false;
-    Timer timer = new Timer(150,this);
+    Timer timer;
     int foodX;
     int foodY;
     Random random = new Random();
@@ -114,6 +114,10 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
             g.setFont(new Font("arial",Font.BOLD,40));
             g.drawString("Failed: Press Space to Start",200,300);
             g.drawString("Press ESC to exit",200,350);
+
+            timer.stop();
+            time = 150;
+            flag = 1;
             if (user.getSnakeScore()<score){
                 userDao.insertScore(score);
             }
@@ -122,6 +126,8 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
     }
 
     public void initSnake(){
+
+        timer = new Timer(time,this);
         len = 3;//定义初始长度
         snakeX[0] = 100;
         snakeY[0] = 100;
@@ -175,7 +181,7 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
                     }
                 }while (a);
 
-                if (score>50*flag){
+                if (score>50*flag&&time>=50){
                     time = time - 50;
                     timer.setDelay(time);
                     flag++;
@@ -209,6 +215,7 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
             if (isFiled){
                 isFiled = false;
                 initSnake();
+                timer.start();
             }else {
                 isStarted = !isStarted;
             }
