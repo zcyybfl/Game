@@ -106,12 +106,14 @@ public class SnakeGamePanel extends JPanel implements KeyListener, ActionListene
             g.setColor(Color.WHITE);
             g.setFont(new Font("arial",Font.BOLD,40));
             g.drawString("Press Space to Start",300,300);
+            g.drawString("Press ESC to exit",300,350);
 
         }
         if (isFiled){
             g.setColor(Color.RED);
             g.setFont(new Font("arial",Font.BOLD,40));
             g.drawString("Failed: Press Space to Start",200,300);
+            g.drawString("Press ESC to exit",200,350);
             if (user.getSnakeScore()<score){
                 userDao.insertScore(score);
             }
